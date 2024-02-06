@@ -389,44 +389,12 @@ public class LaunchkeyMiniMk3ControllerSetup extends AbstractControllerSetup<Lau
         final Modes modeID = modeManager.getActiveID ();
         if (modeID == null)
             return;
-        switch (modeID)
-        {
-            case VOLUME:
-            case PAN:
-            case SEND1:
-            case SEND2:
-                final ITrackBank currentTrackBank = this.model.getCurrentTrackBank ();
-                if (value > 0)
-                    currentTrackBank.selectNextPage ();
-                else
-                    currentTrackBank.selectPreviousPage ();
-                this.mvHelper.notifySelectedTrack ();
-                break;
-
-            case DEVICE_PARAMS:
-                final ICursorDevice cursorDevice = this.model.getCursorDevice ();
-                final IParameterBank parameterBank = cursorDevice.getParameterBank ();
-                if (value > 0)
-                    parameterBank.selectNextItem ();
-                else
-                    parameterBank.selectPreviousItem ();
-                this.mvHelper.notifySelectedParameterPage ();
-                break;
-
-            case USER:
-                if (modeManager.get (Modes.USER) instanceof LaunckeyMiniMk3ProjectParamsMode mode)
-                {
-                    if (value > 0)
-                        mode.selectNextParameterPage ();
-                    else
-                        mode.selectPreviousParameterPage ();
-                    mode.notifyPage ();
-                }
-                break;
-
-            default:
-                // Not used
-                break;
-        }
+        final ITrackBank currentTrackBank = this.model.getCurrentTrackBank ();
+        if (value > 0)
+            currentTrackBank.selectNextPage ();
+        else
+            currentTrackBank.selectPreviousPage ();
+        this.mvHelper.notifySelectedTrack ();
+        break;
     }
 }
